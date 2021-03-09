@@ -40,6 +40,7 @@ def ios_build_framework_merger():
         record = ios_build_record(*record, [])
         framework_gen = get_ios_framework_detail(record)
         for framework in framework_gen:
+            framework = ios_framework_record(*framework)
             record.framework.append(framework)
         yield record
 

@@ -2,6 +2,8 @@
 # -*- encoding: utf-8 -*-
 # @author: James Zhang
 # @data  : 2021/3/9
+import re
+
 import pymysql
 
 class MysqlWrite:
@@ -22,7 +24,54 @@ class MysqlWrite:
         # check project is whether exits
         self.cursor.execute(sql_cmd_r, project_name)
         if not self.cursor.fetchone():
-            self.cursor.execute(sql_cmd_c, (project_name, 'imgs/project_info/Neulion.png'))
+            project_logo = 'imgs/project_info/{}.png'
+            if re.match(r'.*Sky Sport Now.*', project_name):
+                project_logo = project_logo.format('SkySportNow')
+            elif re.match(r'.*Euroleague.*', project_name):
+                project_logo = project_logo.format('EuroLeague')
+            elif re.match(r'.*insight.*', project_name):
+                project_logo = project_logo.format('insight')
+            elif re.match(r'.*btn.*', project_name, re.IGNORECASE):
+                project_logo = project_logo.format('BTN2GO')
+            elif re.match(r'.*Sky Box Office.*', project_name):
+                project_logo = project_logo.format('SkyBoxOffice')
+            elif re.match(r'.*espn.*', project_name, re.IGNORECASE):
+                project_logo = project_logo.format('ESPN')
+            elif re.match(r'.*feitv.*', project_name):
+                project_logo = project_logo.format('FEITV')
+            elif re.match(r'.*ufc.*', project_name, re.IGNORECASE):
+                project_logo = project_logo.format('UFC')
+            elif re.match(r'.*Game Pass.*', project_name):
+                project_logo = project_logo.format('GamePass')
+            elif re.match(r'.*rugbypass.*', project_name, re.IGNORECASE):
+                project_logo = project_logo.format('rugbypass')
+            elif re.match(r'.*wnba.*', project_name, re.IGNORECASE):
+                project_logo = project_logo.format('wnba')
+            elif re.match(r'.*Fan Pass.*', project_name):
+                project_logo = project_logo.format('FanPass')
+            elif re.match(r'.*GamePass.*', project_name):
+                project_logo = project_logo.format('NFLGamePass')
+            elif re.match(r'.*PokerGO.*', project_name):
+                project_logo = project_logo.format('PokerGO')
+            elif re.match(r'.*CRTV.*', project_name):
+                project_logo = project_logo.format('CRTV')
+            elif re.match(r'.*nba.*', project_name, re.IGNORECASE):
+                project_logo = project_logo.format('nba')
+            elif re.match(r'.*ufc-tv.*', project_name):
+                project_logo = project_logo.format('ufc-tv')
+            elif re.match(r'.*SKY_TV.*', project_name):
+                project_logo = project_logo.format('SkySportNow')
+            elif re.match(r'.*lidom.*', project_name, re.IGNORECASE):
+                project_logo = project_logo.format('Lidom')
+            elif re.match(r'.*cntv.*', project_name, re.IGNORECASE):
+                project_logo = project_logo.format('CNTV')
+            elif re.match(r'.*speedway.*', project_name, re.IGNORECASE):
+                project_logo = project_logo.format('Speedwa')
+            elif re.match(r'.*tigohn.*', project_name, re.IGNORECASE):
+                project_logo = project_logo.format('TIGOHN')
+            else:
+                project_logo = project_logo.format('Neulion')
+            self.cursor.execute(sql_cmd_c, (project_name, project_logo))
         self.commit()
         return project_name
 
@@ -33,7 +82,44 @@ class MysqlWrite:
         # check project is whether exits
         self.cursor.execute(sql_cmd_r, project_name)
         if not self.cursor.fetchone():
-            self.cursor.execute(sql_cmd_c, (project_name, 'imgs/project_info/Neulion.png'))
+            project_logo = 'imgs/project_info/{}.png'
+            if re.match(r'.*Sky Sport Now.*', project_name):
+                project_logo = project_logo.format('SkySportNow')
+            elif re.match(r'.*Euroleague.*', project_name):
+                project_logo = project_logo.format('EuroLeague')
+            elif re.match(r'.*insight.*', project_name):
+                project_logo = project_logo.format('insight')
+            elif re.match(r'.*btn2go.*', project_name):
+                project_logo = project_logo.format('BTN2GO')
+            elif re.match(r'.*Sky Box Office.*', project_name):
+                project_logo = project_logo.format('SkyBoxOffice')
+            elif re.match(r'.*espn.*', project_name):
+                project_logo = project_logo.format('ESPN')
+            elif re.match(r'.*feitv.*', project_name):
+                project_logo = project_logo.format('FEITV')
+            elif re.match(r'.*ufc.*', project_name):
+                project_logo = project_logo.format('UFC')
+            elif re.match(r'.*Game Pass.*', project_name):
+                project_logo = project_logo.format('GamePass')
+            elif re.match(r'.*rugbypass.*', project_name):
+                project_logo = project_logo.format('rugbypass')
+            elif re.match(r'.*wnba.*', project_name):
+                project_logo = project_logo.format('wnba')
+            elif re.match(r'.*Fan Pass.*', project_name):
+                project_logo = project_logo.format('FanPass')
+            elif re.match(r'.*GamePass.*', project_name):
+                project_logo = project_logo.format('NFLGamePass')
+            elif re.match(r'.*PokerGO.*', project_name):
+                project_logo = project_logo.format('PokerGO')
+            elif re.match(r'.*CRTV.*', project_name):
+                project_logo = project_logo.format('CRTV')
+            elif re.match(r'.*nba.*', project_name):
+                project_logo = project_logo.format('nba')
+            elif re.match(r'.*ufc-tv.*', project_name):
+                project_logo = project_logo.format('ufc-tv')
+            else:
+                project_logo = project_logo.format('Neulion')
+            self.cursor.execute(sql_cmd_c, (project_name, project_logo ))
 
         self.commit()
         return project_name

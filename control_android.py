@@ -20,7 +20,15 @@ def filter_data():
         record_dict['product_flavor_name'] = record.product_flavor_name
         record_dict['package_target_sdk'] = record.package_target_sdk
         record_dict['package_mini_sdk'] = record.package_mini_sdk
-        record_dict['package_mapping_url'] = record.package_mapping_url
+        package_mapping_url = '/media/android_mapping/'
+        if record.module_name:
+            package_mapping_url = package_mapping_url + record.module_name + \
+                                  '_' + record.package + '_' + record.package_version_name +\
+                                  '_mapping.text'
+        else:
+            package_mapping_url = package_mapping_url + record.package + '_' +\
+                                  record.package_version_name + '_mapping.text'
+        record_dict['package_mapping_url'] = package_mapping_url
         record_dict['deeplink_scheme'] = record.deeplink_scheme
         record_dict['git_sha_code'] = record.git_sha_code
         record_dict['git_branch_name']= record.git_branch_name

@@ -2,6 +2,7 @@
 # -*- encoding: utf-8 -*-
 # @author: James Zhang
 # @data  : 2021/3/9
+import datetime
 import re
 
 import pymysql
@@ -19,8 +20,8 @@ class MysqlWrite:
 
     def insert_project_ios(self, project_name):
         sql_cmd_r = 'select * from project_info_iosproject where project_name=%s'
-        sql_cmd_c = 'insert into project_info_iosproject (project_name, project_logo) value ' \
-                    '(%s, %s)'
+        sql_cmd_c = 'insert into project_info_iosproject (project_name, project_logo, update_date) value ' \
+                    '(%s, %s, %s)'
         # check project is whether exits
         self.cursor.execute(sql_cmd_r, project_name)
         if not self.cursor.fetchone():
@@ -71,14 +72,14 @@ class MysqlWrite:
                 project_logo = project_logo.format('TIGOHN')
             else:
                 project_logo = project_logo.format('Neulion')
-            self.cursor.execute(sql_cmd_c, (project_name, project_logo))
+            self.cursor.execute(sql_cmd_c, (project_name, project_logo, datetime.datetime.now()))
         self.commit()
         return project_name
 
     def insert_project_android(self, project_name):
         sql_cmd_r = 'select * from project_info_androidproject where project_name=%s'
-        sql_cmd_c = 'insert into project_info_androidproject (project_name, project_logo) value ' \
-                    '(%s, %s)'
+        sql_cmd_c = 'insert into project_info_androidproject (project_name, project_logo, update_date) value ' \
+                    '(%s, %s, %s)'
         # check project is whether exits
         self.cursor.execute(sql_cmd_r, project_name)
         if not self.cursor.fetchone():
@@ -119,7 +120,7 @@ class MysqlWrite:
                 project_logo = project_logo.format('ufc-tv')
             else:
                 project_logo = project_logo.format('Neulion')
-            self.cursor.execute(sql_cmd_c, (project_name, project_logo ))
+            self.cursor.execute(sql_cmd_c, (project_name, project_logo, datetime.datetime.now()))
 
         self.commit()
         return project_name
